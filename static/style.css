@@ -21,3 +21,28 @@ dialog{background:var(--panel);color:#e8edf3;border:1px solid var(--line);border
 #generation-mesh-mode{height:auto}#generation-options{margin:16px 0;padding:10px;border:1px solid var(--line);border-radius:7px}#generation-model-summary{line-height:1.8;overflow-wrap:anywhere}
 
 #model-library button[aria-pressed="true"]{border-color:#bce990;box-shadow:inset 3px 0 #bce990}
+
+/* Compact controls keep the geometry, rather than form fields, in focus. */
+select:not([multiple]){height:auto;min-height:36px}
+button,input,select,textarea{font:inherit}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+button:disabled{cursor:not-allowed;opacity:.45}
+header strong{font-size:20px;letter-spacing:1.5px;white-space:nowrap}
+header strong span{margin-left:12px}
+.library-filters{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.library-filters label{margin-top:12px;min-width:0}
+.library-filters select{font-size:12px;padding:8px 5px}
+.model-sidebar,.model-inspector{scrollbar-width:thin;scrollbar-color:#414c59 transparent}
+.model-inspector h2{font-weight:650;scroll-margin-top:65px}
+.inspector-shortcuts{position:sticky;top:-22px;background:var(--panel);z-index:2;display:flex;gap:5px;padding:12px 0;border-bottom:1px solid var(--line);margin:-8px 0 20px}
+.inspector-shortcuts button{flex:1;white-space:nowrap;font-size:11px;padding:8px 4px;margin:0}
+#model-empty{padding:24px;text-align:center;gap:12px}
+#model-empty h2{color:#e8edf3;font-size:23px;font-weight:600}
+#model-empty p{margin:0;max-width:340px;line-height:1.8}
+#model-empty small{line-height:1.9}
+.empty-symbol{font-size:50px;color:var(--accent)}
+.empty-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin:8px 0;pointer-events:auto}
+.model-toolbar button,.model-engineering-tools button{font-size:12px;padding:8px 10px}
+#model-title{overflow-wrap:anywhere}
+@media(min-width:1101px){#model-workspace{min-height:560px}.model-inspector{border-left:1px solid var(--line);border-right:0}}
+@media(max-width:650px){.model-center{order:-1}#model-canvas{min-height:360px}.workspace-tabs{padding:10px 15px}.model-toolbar{gap:8px;padding:12px}.model-engineering-tools{padding:12px;gap:10px}.inspector-shortcuts{top:0}.model-sidebar,.model-inspector{padding:20px}.model-inspector h2{scroll-margin-top:65px}header>div{justify-content:flex-start}header button{font-size:12px;padding:8px}}

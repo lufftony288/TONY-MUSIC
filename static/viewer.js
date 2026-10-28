@@ -386,3 +386,9 @@ function updateGenerationOptions(){
  $('model-prompt').maxLength=providerAdapter==='meshy'&&!$('model-image').files[0]?800:4000;
 }
 $('generation-mesh-mode').onchange=updateGenerationOptions;$('model-image').onchange=updateGenerationOptions;
+
+$('empty-upload').onclick=()=>$('upload-model').click();
+$('empty-demo').onclick=()=>$('view-current').click();
+document.querySelectorAll('[data-inspector-target]').forEach(button=>{
+ button.onclick=()=>{const heading=$(button.dataset.inspectorTarget);heading.scrollIntoView({block:'start',behavior:'auto'});heading.focus({preventScroll:true});};
+});

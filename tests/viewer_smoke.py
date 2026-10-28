@@ -32,6 +32,13 @@ with tempfile.TemporaryDirectory() as folder:
             page.wait_for_selector('#model-canvas canvas')
             page.wait_for_function("document.querySelector('#provider-status').textContent.includes('尚未配置')")
             assert page.locator('#ai-model-submit').is_disabled()
+            assert page.locator('#library-format').bounding_box()['height']<50
+            assert page.locator('#empty-upload').is_visible()
+            page.click('#empty-demo')
+            page.wait_for_function("document.querySelector('#model-count').textContent==='5 网格'")
+            assert not page.locator('#model-empty').is_visible()
+            page.click('[data-inspector-target="ai-heading"]')
+            assert page.locator('#ai-heading').evaluate('el=>document.activeElement===el')
             fixtures=[('assembly.glb',glb(),2),('parts.obj',OBJ,2),('triangle.stl',STL,1),('binary.stl',BINARY_STL,1)]
             for name,data,count in fixtures:
                 page.locator('#model-file').set_input_files({'name':name,'mimeType':'application/octet-stream','buffer':data})
