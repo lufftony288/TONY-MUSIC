@@ -1,0 +1,12 @@
+__pycache__/
+.data/
+*.log
+
+node_modules/
+
+.venv/
+
+dist/
+local-settings.json
+
+.env

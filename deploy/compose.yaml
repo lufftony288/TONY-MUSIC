@@ -1,0 +1,32 @@
+services:
+  app:
+    build:
+      context: ..
+    restart: unless-stopped
+    environment:
+      FORM_PUBLIC_ORIGIN: https://${APP_DOMAIN:?Set APP_DOMAIN}
+      MODEL_GENERATOR_PROVIDER: meshy
+      MESHY_API_KEY: ${MESHY_API_KEY:-}
+    volumes:
+      - app_data:/app/.data
+  gateway:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      APP_DOMAIN: ${APP_DOMAIN:?Set APP_DOMAIN}
+      APP_USER: ${APP_USER:-tester}
+      APP_PASSWORD_HASH: ${APP_PASSWORD_HASH:?Set APP_PASSWORD_HASH}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      app:
+        condition: service_healthy
+volumes:
+  app_data:
+  caddy_data:
+  caddy_config:
